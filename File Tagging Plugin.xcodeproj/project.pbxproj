@@ -1,0 +1,264 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D4C9909817E9F5D400BC78F0 /* FileTaggingHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = D4C9908A17E9F5D400BC78F0 /* FileTaggingHandler.m */; };
+		D4C9909A17E9F5D400BC78F0 /* QSFileTaggingAction.m in Sources */ = {isa = PBXBuildFile; fileRef = D4C9908D17E9F5D400BC78F0 /* QSFileTaggingAction.m */; };
+		D4C9909B17E9F5D400BC78F0 /* QSFileTagSource.m in Sources */ = {isa = PBXBuildFile; fileRef = D4C9908F17E9F5D400BC78F0 /* QSFileTagSource.m */; };
+		D4C9909C17E9F5D400BC78F0 /* QSObject+FileTags.m in Sources */ = {isa = PBXBuildFile; fileRef = D4C9909217E9F5D400BC78F0 /* QSObject+FileTags.m */; };
+		D4C9909D17E9F5D400BC78F0 /* QSTaggedFilesSource.m in Sources */ = {isa = PBXBuildFile; fileRef = D4C9909417E9F5D400BC78F0 /* QSTaggedFilesSource.m */; };
+		D4C9909E17E9F5D400BC78F0 /* QSTaggedFilesSource.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4C9909617E9F5D400BC78F0 /* QSTaggedFilesSource.xib */; };
+		D4C9909F17E9F5D400BC78F0 /* Tag.png in Resources */ = {isa = PBXBuildFile; fileRef = D4C9909717E9F5D400BC78F0 /* Tag.png */; };
+		D4E55E7517E9F50D00F5DA51 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4E55E7417E9F50D00F5DA51 /* Cocoa.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		D4C9908917E9F5D400BC78F0 /* FileTaggingHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileTaggingHandler.h; sourceTree = "<group>"; };
+		D4C9908A17E9F5D400BC78F0 /* FileTaggingHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileTaggingHandler.m; sourceTree = "<group>"; };
+		D4C9908B17E9F5D400BC78F0 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D4C9908C17E9F5D400BC78F0 /* QSFileTaggingAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSFileTaggingAction.h; sourceTree = "<group>"; };
+		D4C9908D17E9F5D400BC78F0 /* QSFileTaggingAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSFileTaggingAction.m; sourceTree = "<group>"; };
+		D4C9908E17E9F5D400BC78F0 /* QSFileTagSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSFileTagSource.h; sourceTree = "<group>"; };
+		D4C9908F17E9F5D400BC78F0 /* QSFileTagSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSFileTagSource.m; sourceTree = "<group>"; };
+		D4C9909017E9F5D400BC78F0 /* QSFinderPlugIn_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSFinderPlugIn_Prefix.pch; sourceTree = "<group>"; };
+		D4C9909117E9F5D400BC78F0 /* QSObject+FileTags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "QSObject+FileTags.h"; sourceTree = "<group>"; };
+		D4C9909217E9F5D400BC78F0 /* QSObject+FileTags.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "QSObject+FileTags.m"; sourceTree = "<group>"; };
+		D4C9909317E9F5D400BC78F0 /* QSTaggedFilesSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSTaggedFilesSource.h; sourceTree = "<group>"; };
+		D4C9909417E9F5D400BC78F0 /* QSTaggedFilesSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSTaggedFilesSource.m; sourceTree = "<group>"; };
+		D4C9909617E9F5D400BC78F0 /* QSTaggedFilesSource.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QSTaggedFilesSource.xib; sourceTree = "<group>"; };
+		D4C9909717E9F5D400BC78F0 /* Tag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tag.png; sourceTree = "<group>"; };
+		D4E55E7117E9F50D00F5DA51 /* File Tagging Plugin.qsplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "File Tagging Plugin.qsplugin"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4E55E7417E9F50D00F5DA51 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		D4E55E7D17E9F50D00F5DA51 /* Common.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Common.xcconfig; sourceTree = "<group>"; };
+		D4E55E7E17E9F50D00F5DA51 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		D4E55E7F17E9F50D00F5DA51 /* Developer.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Developer.xcconfig; sourceTree = "<group>"; };
+		D4E55E8017E9F50D00F5DA51 /* QSPlugIn.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = QSPlugIn.xcconfig; sourceTree = "<group>"; };
+		D4E55E8117E9F50D00F5DA51 /* Quicksilver.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Quicksilver.pch; sourceTree = "<group>"; };
+		D4E55E8217E9F50D00F5DA51 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D4E55E6E17E9F50D00F5DA51 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4E55E7517E9F50D00F5DA51 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D4C9909517E9F5D400BC78F0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D4C9909617E9F5D400BC78F0 /* QSTaggedFilesSource.xib */,
+				D4C9909717E9F5D400BC78F0 /* Tag.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		D4E55E6717E9F50D00F5DA51 = {
+			isa = PBXGroup;
+			children = (
+				D4C9908917E9F5D400BC78F0 /* FileTaggingHandler.h */,
+				D4C9908A17E9F5D400BC78F0 /* FileTaggingHandler.m */,
+				D4C9908C17E9F5D400BC78F0 /* QSFileTaggingAction.h */,
+				D4C9908D17E9F5D400BC78F0 /* QSFileTaggingAction.m */,
+				D4C9908E17E9F5D400BC78F0 /* QSFileTagSource.h */,
+				D4C9908F17E9F5D400BC78F0 /* QSFileTagSource.m */,
+				D4C9909017E9F5D400BC78F0 /* QSFinderPlugIn_Prefix.pch */,
+				D4C9909117E9F5D400BC78F0 /* QSObject+FileTags.h */,
+				D4C9909217E9F5D400BC78F0 /* QSObject+FileTags.m */,
+				D4C9909317E9F5D400BC78F0 /* QSTaggedFilesSource.h */,
+				D4C9909417E9F5D400BC78F0 /* QSTaggedFilesSource.m */,
+				D4C9908B17E9F5D400BC78F0 /* Info.plist */,
+				D4C9909517E9F5D400BC78F0 /* Resources */,
+				D4E55E7C17E9F50D00F5DA51 /* Configuration */,
+				D4E55E7317E9F50D00F5DA51 /* Frameworks */,
+				D4E55E7217E9F50D00F5DA51 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D4E55E7217E9F50D00F5DA51 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D4E55E7117E9F50D00F5DA51 /* File Tagging Plugin.qsplugin */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D4E55E7317E9F50D00F5DA51 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D4E55E7417E9F50D00F5DA51 /* Cocoa.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D4E55E7C17E9F50D00F5DA51 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				D4E55E7D17E9F50D00F5DA51 /* Common.xcconfig */,
+				D4E55E7E17E9F50D00F5DA51 /* Debug.xcconfig */,
+				D4E55E7F17E9F50D00F5DA51 /* Developer.xcconfig */,
+				D4E55E8017E9F50D00F5DA51 /* QSPlugIn.xcconfig */,
+				D4E55E8117E9F50D00F5DA51 /* Quicksilver.pch */,
+				D4E55E8217E9F50D00F5DA51 /* Release.xcconfig */,
+			);
+			name = Configuration;
+			path = /private/tmp/QS/Configuration;
+			sourceTree = "<absolute>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D4E55E7017E9F50D00F5DA51 /* File Tagging Plugin */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D4E55E8D17E9F50D00F5DA51 /* Build configuration list for PBXNativeTarget "File Tagging Plugin" */;
+			buildPhases = (
+				D4E55E6C17E9F50D00F5DA51 /* Update Version and Documentation */,
+				D4E55E6D17E9F50D00F5DA51 /* Sources */,
+				D4E55E6E17E9F50D00F5DA51 /* Frameworks */,
+				D4E55E6F17E9F50D00F5DA51 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "File Tagging Plugin";
+			productName = "File Tagging Plugin";
+			productReference = D4E55E7117E9F50D00F5DA51 /* File Tagging Plugin.qsplugin */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D4E55E6817E9F50D00F5DA51 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "Skurfers' Alliance";
+			};
+			buildConfigurationList = D4E55E6B17E9F50D00F5DA51 /* Build configuration list for PBXProject "File Tagging Plugin" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = D4E55E6717E9F50D00F5DA51;
+			productRefGroup = D4E55E7217E9F50D00F5DA51 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D4E55E7017E9F50D00F5DA51 /* File Tagging Plugin */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D4E55E6F17E9F50D00F5DA51 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4C9909F17E9F5D400BC78F0 /* Tag.png in Resources */,
+				D4C9909E17E9F5D400BC78F0 /* QSTaggedFilesSource.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D4E55E6C17E9F50D00F5DA51 /* Update Version and Documentation */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Update Version and Documentation";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "\"$QS_BUILD_ROOT/Tools/bltrversion\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D4E55E6D17E9F50D00F5DA51 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4C9909B17E9F5D400BC78F0 /* QSFileTagSource.m in Sources */,
+				D4C9909D17E9F5D400BC78F0 /* QSTaggedFilesSource.m in Sources */,
+				D4C9909817E9F5D400BC78F0 /* FileTaggingHandler.m in Sources */,
+				D4C9909A17E9F5D400BC78F0 /* QSFileTaggingAction.m in Sources */,
+				D4C9909C17E9F5D400BC78F0 /* QSObject+FileTags.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		D4E55E8B17E9F50D00F5DA51 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D4E55E7E17E9F50D00F5DA51 /* Debug.xcconfig */;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		D4E55E8C17E9F50D00F5DA51 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D4E55E8217E9F50D00F5DA51 /* Release.xcconfig */;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		D4E55E8E17E9F50D00F5DA51 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D4E55E8017E9F50D00F5DA51 /* QSPlugIn.xcconfig */;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		D4E55E8F17E9F50D00F5DA51 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D4E55E8017E9F50D00F5DA51 /* QSPlugIn.xcconfig */;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D4E55E6B17E9F50D00F5DA51 /* Build configuration list for PBXProject "File Tagging Plugin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D4E55E8B17E9F50D00F5DA51 /* Debug */,
+				D4E55E8C17E9F50D00F5DA51 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D4E55E8D17E9F50D00F5DA51 /* Build configuration list for PBXNativeTarget "File Tagging Plugin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D4E55E8E17E9F50D00F5DA51 /* Debug */,
+				D4E55E8F17E9F50D00F5DA51 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D4E55E6817E9F50D00F5DA51 /* Project object */;
+}
