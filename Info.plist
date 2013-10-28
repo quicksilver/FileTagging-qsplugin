@@ -28,7 +28,7 @@
 			<string>QSFileTaggingAction</string>
 			<key>actionSelector</key>
 			<string>addToFiles:tagList:</string>
-			<key>description</key>
+			<key>name</key>
 			<string>Add Tags…</string>
 			<key>directTypes</key>
 			<array>
@@ -50,7 +50,7 @@
 			<string>QSFileTaggingAction</string>
 			<key>actionSelector</key>
 			<string>clearTagsFromFiles:</string>
-			<key>description</key>
+			<key>name</key>
 			<string>Clear Tags</string>
 			<key>directTypes</key>
 			<array>
@@ -65,7 +65,7 @@
 			<string>QSFileTaggingAction</string>
 			<key>actionSelector</key>
 			<string>removeFromFiles:tags:</string>
-			<key>description</key>
+			<key>name</key>
 			<string>Remove Tags…</string>
 			<key>directTypes</key>
 			<array>
@@ -86,7 +86,7 @@
 			<string>QSFileTaggingAction</string>
 			<key>actionSelector</key>
 			<string>setToFiles:tagList:</string>
-			<key>description</key>
+			<key>name</key>
 			<string>Set Tags…</string>
 			<key>directTypes</key>
 			<array>
@@ -108,7 +108,7 @@
 			<string>QSFileTaggingAction</string>
 			<key>actionSelector</key>
 			<string>showTagsForFiles:</string>
-			<key>description</key>
+			<key>name</key>
 			<string>Show Tags</string>
 			<key>directTypes</key>
 			<array>
