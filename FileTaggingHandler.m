@@ -179,15 +179,15 @@ NSString *const kFileTaggingXAttrKeyword = @"com.apple.metadata:_kMDItemUserTags
     if(dataSize < ULONG_MAX) {
         NSMutableData *data = [NSMutableData dataWithLength:dataSize];
         getxattr([path fileSystemRepresentation], [key UTF8String], [data mutableBytes], [data length], 0, 0);
-        NSPropertyListFormat outFormat = NSPropertyListXMLFormat_v1_0;
-        value = [NSPropertyListSerialization propertyListFromData:data mutabilityOption:NSPropertyListImmutable format:&outFormat errorDescription:nil];
+        NSPropertyListFormat outFormat = NSPropertyListBinaryFormat_v1_0;
+        value = [NSPropertyListSerialization propertyListWithData:data options:NSPropertyListImmutable format:&outFormat error:nil];
     }
     return value;
 }
 
 - (void)_setValue:(id)value forKey:(NSString *)key atPath:(NSString* )path
 {
-    NSData *data = [NSPropertyListSerialization dataFromPropertyList:value format:NSPropertyListXMLFormat_v1_0 errorDescription:nil];
+    NSData *data = [NSPropertyListSerialization dataWithPropertyList:value format:NSPropertyListBinaryFormat_v1_0 options:0 error:nil];
     setxattr([path fileSystemRepresentation], [key UTF8String], [data bytes], [data length], 0, 0);
 }
 
