@@ -28,6 +28,12 @@
     return tags;
 }
 
+- (NSString *)detailsOfObject:(QSObject *)object
+{
+    // effectively suppress details by making them equal to name
+    return [object displayName];
+}
+
 - (BOOL)loadChildrenForObject:(QSObject *)object
 {
     NSMutableArray *children = [NSMutableArray array];
