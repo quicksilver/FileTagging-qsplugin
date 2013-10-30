@@ -110,6 +110,13 @@ NSString *const kFileTaggingXAttrKeyword = @"com.apple.metadata:_kMDItemUserTags
 - (void)setTags:(NSArray *)tags forFile:(NSString *)filePath
 {
     [self _setValue:tags forKey:kFileTaggingXAttrKeyword atPath:filePath];
+    for (NSString *tag in tags) {
+        NSArray *parts = [tag componentsSeparatedByString:@"\n"];
+        if ([parts count] == 2) {
+            NSInteger color = [parts[1] integerValue];
+            [self setLabel:color forPath:filePath];
+        }
+    }
 }
 
 - (NSArray *)tagsFromString:(NSString *)tagList
@@ -191,4 +198,56 @@ NSString *const kFileTaggingXAttrKeyword = @"com.apple.metadata:_kMDItemUserTags
     setxattr([path fileSystemRepresentation], [key UTF8String], [data bytes], [data length], 0, 0);
 }
 
+- (void) setLabel:(NSInteger)label forPath:(NSString *)path{
+    FSCatalogInfo info;
+	FSRef par;
+    Boolean dir = false;
+    
+	if (FSPathMakeRef((const UInt8 *)[path fileSystemRepresentation],&par,&dir) == noErr) {
+        
+        /* Get the Finder Catalog Info */
+        OSErr err = FSGetCatalogInfo(&par,
+                                     kFSCatInfoContentMod | kFSCatInfoFinderXInfo | kFSCatInfoFinderInfo,
+                                     &info,
+                                     NULL,
+                                     NULL,
+                                     NULL);
+        
+        if (err != noErr)
+		{
+            NSLog(@"Unabled to get catalog info... %i", err);
+			return;
+		}
+        
+        /* Manipulate the Finder CatalogInfo */
+        UInt16 *flags = &((FileInfo*)(&info.finderInfo))->finderFlags;
+        
+        //To Turn off
+        // *flags &= kColor;
+        
+        /*
+         0 is off
+         1 is Grey
+         2 is Green
+         3 is Purple
+         4 is Blue
+         5 is Yellow
+         6 is Red
+         7 is Orange
+         */
+        
+        *flags = ( *flags &~ kColor) | ( (label << 1) & kColor );
+        
+        /* Set the Finder Catalog Info Back */
+        err = FSSetCatalogInfo(&par,
+                               kFSCatInfoContentMod | kFSCatInfoFinderXInfo | kFSCatInfoFinderInfo,
+                               &info);
+        
+        if (err != noErr)
+        {
+            NSLog(@"Unable to set catalog info... %i", err);
+            return;
+        }
+    }
+}
 @end
