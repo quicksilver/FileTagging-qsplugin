@@ -27,7 +27,7 @@ NSString *const kFileTaggingXAttrKeyword = @"com.apple.metadata:_kMDItemUserTags
 - (NSSet *)allTagNames
 {
     NSString *queryString = [NSString stringWithFormat:@"%@ == *", kFileTaggingKeyword];
-    NSArray *types = [NSArray arrayWithObject:kFileTaggingKeyword];
+    NSArray *types = [NSArray arrayWithObject:(NSString *)kMDItemPath];
     
     NSMutableSet *tags = [NSMutableSet set];
     [self _runQuery:queryString forTypes:types usingBlock:[self _addTagNamesBlock:tags]];
@@ -150,11 +150,11 @@ NSString *const kFileTaggingXAttrKeyword = @"com.apple.metadata:_kMDItemUserTags
 - (QSFileTagQueryBlock)_addTagNamesBlock:(NSMutableSet *)tags
 {
     return [[^(MDQueryRef query, CFIndex i) {
-        CFArrayRef tagNames = MDQueryGetAttributeValueOfResultAtIndex(query, (CFStringRef)kFileTaggingKeyword, i);
-        if(tagNames != NULL) {
-            for(NSString *tagName in (NSArray *)tagNames) {
-                [tags addObject:tagName];
-            }
+        MDItemRef item = (MDItemRef)MDQueryGetResultAtIndex(query, i);
+        NSString *path = (NSString*)MDItemCopyAttribute(item, kMDItemPath);
+        NSArray *tagNames = [self tagNamesForFile:path];
+        for (NSString *tagName in tagNames) {
+            [tags addObject:tagName];
         }
     } copy] autorelease];
 }
