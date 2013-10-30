@@ -32,3 +32,20 @@ All of the expected tagging actions are made available by the plugin. Users can 
 In addition to operating on multiple files, you can use multiple tags in an operation. A list of appropriate tags should appear in the third pane. You can enter a new tag by switching to text-entry mode. Multiple tags can be selected with the comma trick or entered in text-entry mode by separating them with commas.
 
 Tags can contain almost anything other than comma.
+
+## Actions ##
+
+Add Tags…
+  : Add tags to the selected file(s).
+
+Set Tags…
+  : Apply tags to the selected file(s), replacing any existing tags.
+
+Remove Tags…
+  : Remove specific tags from the selected file(s).
+
+Show Tags
+  : Show a list of tags currently assigned to the selected file(s).
+
+Clear Tags
+  : Remove all tags from the selected file(s).
