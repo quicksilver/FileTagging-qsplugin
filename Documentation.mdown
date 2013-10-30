@@ -38,6 +38,9 @@ Tags can contain almost anything other than comma.
 Add Tags…
   : Add tags to the selected file(s).
 
+Add to File…
+  : Apply the selected tag to one or more files in the third pane.
+
 Set Tags…
   : Apply tags to the selected file(s), replacing any existing tags.
 

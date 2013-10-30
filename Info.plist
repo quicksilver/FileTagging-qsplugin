@@ -44,6 +44,30 @@
 			<key>name</key>
 			<string>Add Tags…</string>
 		</dict>
+		<key>AddTagsToFiles</key>
+		<dict>
+			<key>actionClass</key>
+			<string>QSFileTaggingAction</string>
+			<key>actionSelector</key>
+			<string>addToFiles:tagList:</string>
+			<key>directTypes</key>
+			<array>
+				<string>QSFileTag</string>
+				<string>NSStringPboardType</string>
+			</array>
+			<key>icon</key>
+			<string>TagIcon</string>
+			<key>indirectOptional</key>
+			<false/>
+			<key>indirectTypes</key>
+			<array>
+				<string>NSFilenamesPboardType</string>
+			</array>
+			<key>name</key>
+			<string>Add to File…</string>
+			<key>reverseArguments</key>
+			<true/>
+		</dict>
 		<key>ClearFileTags</key>
 		<dict>
 			<key>actionClass</key>
@@ -150,6 +174,8 @@
 &lt;dl&gt;
 &lt;dt&gt;Add Tags…&lt;/dt&gt;
 &lt;dd&gt;Add tags to the selected file(s).&lt;/dd&gt;
+&lt;dt&gt;Add to File…&lt;/dt&gt;
+&lt;dd&gt;Apply the selected tag to one or more files in the third pane.&lt;/dd&gt;
 &lt;dt&gt;Set Tags…&lt;/dt&gt;
 &lt;dd&gt;Apply tags to the selected file(s), replacing any existing tags.&lt;/dd&gt;
 &lt;dt&gt;Remove Tags…&lt;/dt&gt;
