@@ -109,13 +109,18 @@ NSString *const kFileTaggingXAttrKeyword = @"com.apple.metadata:_kMDItemUserTags
 
 - (void)setTags:(NSArray *)tags forFile:(NSString *)filePath
 {
-    [self _setValue:tags forKey:kFileTaggingXAttrKeyword atPath:filePath];
-    for (NSString *tag in tags) {
-        NSArray *parts = [tag componentsSeparatedByString:@"\n"];
-        if ([parts count] == 2) {
-            NSInteger color = [parts[1] integerValue];
-            [self setLabel:color forPath:filePath];
+    if ([tags count]) {
+        [self _setValue:tags forKey:kFileTaggingXAttrKeyword atPath:filePath];
+        for (NSString *tag in tags) {
+            NSArray *parts = [tag componentsSeparatedByString:@"\n"];
+            if ([parts count] == 2) {
+                NSInteger color = [parts[1] integerValue];
+                [self setLabel:color forPath:filePath];
+            }
         }
+    } else {
+        [self _removeAllValuesForKey:kFileTaggingXAttrKeyword atPath:filePath];
+        [self setLabel:0 forPath:filePath];
     }
 }
 
@@ -196,6 +201,11 @@ NSString *const kFileTaggingXAttrKeyword = @"com.apple.metadata:_kMDItemUserTags
 {
     NSData *data = [NSPropertyListSerialization dataWithPropertyList:value format:NSPropertyListBinaryFormat_v1_0 options:0 error:nil];
     setxattr([path fileSystemRepresentation], [key UTF8String], [data bytes], [data length], 0, 0);
+}
+
+- (void)_removeAllValuesForKey:(NSString *)key atPath:(NSString *)path
+{
+    removexattr([path fileSystemRepresentation], [key UTF8String], 0);
 }
 
 - (void) setLabel:(NSInteger)label forPath:(NSString *)path{
