@@ -9,8 +9,10 @@
 
 @implementation QSObject (FileTags)
 
-+ (QSObject *)fileTagWithName:(NSString *)tagName
++ (QSObject *)fileTagWithName:(NSString *)rawTagName
 {
+    NSArray *nameParts = [rawTagName componentsSeparatedByString:@"\n"];
+    NSString *tagName = nameParts[0];
     NSString *tagID = [NSString stringWithFormat:@"%@:%@", kQSFileTag, tagName];
     // try to get an existing tag from the catalog
     QSObject *tag = [self objectWithIdentifier:tagID];
@@ -20,8 +22,12 @@
         tag = [self makeObjectWithIdentifier:tagID];
         [tag setName:name];
         [tag setLabel:tagName];
-        [tag setObject:tagName forType:kQSFileTag];
+        [tag setObject:rawTagName forType:kQSFileTag];
         [tag setPrimaryType:kQSFileTag];
+        if ([nameParts count] == 2) {
+            // store the color for icon customization
+            [tag setObject:nameParts[1] forMeta:kQSFileTagColorKey];
+        }
     }
     return tag;
 }
