@@ -18,6 +18,7 @@ typedef void(^ QSFileTagQueryBlock)(MDQueryRef query, CFIndex i);
 @interface FileTaggingHandler : NSObject
 
 + (FileTaggingHandler *)sharedHandler;
++ (NSString *)nameFromTagData:(NSString *)tagData;
 - (NSSet *)allTagNames;
 - (NSArray *)filesWithTagList:(NSString *)tagList;
 - (NSArray *)relatedTagNamesForTagList:(NSString *)tagList;

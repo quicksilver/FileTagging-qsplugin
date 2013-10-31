@@ -24,6 +24,12 @@ NSString *const kFileTaggingXAttrKeyword = @"com.apple.metadata:_kMDItemUserTags
     return sharedHandler;
 }
 
++ (NSString *)nameFromTagData:(NSString *)tagData
+{
+    NSArray *parts = [tagData lines];
+    return parts[0];
+}
+
 - (NSSet *)allTagNames
 {
     NSString *queryString = [NSString stringWithFormat:@"%@ == *", kFileTaggingKeyword];
