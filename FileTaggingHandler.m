@@ -75,6 +75,7 @@ NSString *const kFileTaggingXAttrKeyword = @"com.apple.metadata:_kMDItemUserTags
     NSArray *tagNames = [self tagsFromString:tagList];
     NSArray *relatedTagNames = [self relatedTagNamesForTagList:tagList];
     for(NSString *tagName in relatedTagNames) {
+        tagName = [FileTaggingHandler nameFromTagData:tagName];
         if(![tagNames containsObject:tagName]) {
             NSString *tagListString = [tagList stringByAppendingFormat:@", %@", tagName];
             NSString *combinedTagString = [tagListString stringByReplacingOccurrencesOfString:@", " withString:@" + "];
@@ -118,7 +119,7 @@ NSString *const kFileTaggingXAttrKeyword = @"com.apple.metadata:_kMDItemUserTags
     if ([tags count]) {
         [self _setValue:tags forKey:kFileTaggingXAttrKeyword atPath:filePath];
         for (NSString *tag in tags) {
-            NSArray *parts = [tag componentsSeparatedByString:@"\n"];
+            NSArray *parts = [tag lines];
             if ([parts count] == 2) {
                 NSInteger color = [parts[1] integerValue];
                 [self setLabel:color forPath:filePath];

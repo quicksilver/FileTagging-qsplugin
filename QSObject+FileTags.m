@@ -11,7 +11,7 @@
 
 + (QSObject *)fileTagWithName:(NSString *)rawTagName
 {
-    NSArray *nameParts = [rawTagName componentsSeparatedByString:@"\n"];
+    NSArray *nameParts = [rawTagName lines];
     NSString *tagName = nameParts[0];
     NSString *tagID = [NSString stringWithFormat:@"%@:%@", kQSFileTag, tagName];
     // try to get an existing tag from the catalog
