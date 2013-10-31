@@ -67,6 +67,8 @@
 			<string>Add to File…</string>
 			<key>reverseArguments</key>
 			<true/>
+			<key>validatesObjects</key>
+			<true/>
 		</dict>
 		<key>ClearFileTags</key>
 		<dict>

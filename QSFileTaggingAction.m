@@ -129,7 +129,16 @@
         }
     }
     return nil;
-} 
+}
+
+- (NSArray *)validActionsForDirectObject:(QSObject *)dObject indirectObject:(QSObject *)iObject
+{
+    // don't allow transient tags to be applied to files
+    if (![[dObject identifier] containsString:kQSFileTagTransient]) {
+        return @[@"AddTagsToFiles"];
+    }
+    return nil;
+}
 
 - (void)addCatalogTags:(QSObject *)tags
 {
