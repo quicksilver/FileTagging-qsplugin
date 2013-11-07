@@ -90,7 +90,10 @@
 
 - (QSObject *)clearTagsFromFiles:(QSObject *)files
 {
-    [self setToFiles:files tagList:nil];
+    FileTaggingHandler *tagHandler = [FileTaggingHandler sharedHandler];
+    for (QSObject *file in [files splitObjects]) {
+        [tagHandler setTags:@[] forFile:[file objectForType:NSFilenamesPboardType]];
+    }
     [[NSNotificationCenter defaultCenter] postNotificationName:@"QSEventNotification" object:@"QSFileTagsCleared" userInfo:@{@"object": files}];
     [self updateTagsOnDisk];
     return nil;

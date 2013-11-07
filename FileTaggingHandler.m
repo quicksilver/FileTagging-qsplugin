@@ -24,12 +24,6 @@ NSString *const kFileTaggingXAttrKeyword = @"com.apple.metadata:_kMDItemUserTags
     return sharedHandler;
 }
 
-+ (NSString *)nameFromTagData:(NSString *)tagData
-{
-    NSArray *parts = [tagData lines];
-    return parts[0];
-}
-
 - (NSSet *)allTagNames
 {
     NSString *queryString = [NSString stringWithFormat:@"%@ == *", kFileTaggingKeyword];
@@ -75,7 +69,6 @@ NSString *const kFileTaggingXAttrKeyword = @"com.apple.metadata:_kMDItemUserTags
     NSArray *tagNames = [self tagsFromString:tagList];
     NSArray *relatedTagNames = [self relatedTagNamesForTagList:tagList];
     for(NSString *tagName in relatedTagNames) {
-        tagName = [FileTaggingHandler nameFromTagData:tagName];
         if(![tagNames containsObject:tagName]) {
             NSString *tagListString = [tagList stringByAppendingFormat:@", %@", tagName];
             NSString *combinedTagString = [tagListString stringByReplacingOccurrencesOfString:@", " withString:@" + "];
@@ -96,8 +89,9 @@ NSString *const kFileTaggingXAttrKeyword = @"com.apple.metadata:_kMDItemUserTags
 
 - (NSArray *)tagNamesForFile:(NSString *)filePath
 {
-    NSArray *tagNames = [self _valueForKey:kFileTaggingXAttrKeyword atPath:filePath];
-    return tagNames;
+    NSURL *fileURL = [NSURL fileURLWithPath:filePath];
+    NSDictionary *res = [fileURL resourceValuesForKeys:@[NSURLTagNamesKey] error:nil];
+    return [res objectForKey:NSURLTagNamesKey];
 }
 
 - (void)addTags:(NSArray *)tags toFile:(NSString *)filePath
@@ -116,18 +110,17 @@ NSString *const kFileTaggingXAttrKeyword = @"com.apple.metadata:_kMDItemUserTags
 
 - (void)setTags:(NSArray *)tags forFile:(NSString *)filePath
 {
-    if ([tags count]) {
-        [self _setValue:tags forKey:kFileTaggingXAttrKeyword atPath:filePath];
-        for (NSString *tag in tags) {
-            NSArray *parts = [tag lines];
-            if ([parts count] == 2) {
-                NSInteger color = [parts[1] integerValue];
-                [self setLabel:color forPath:filePath];
-            }
-        }
-    } else {
-        [self _removeAllValuesForKey:kFileTaggingXAttrKeyword atPath:filePath];
-        [self setLabel:0 forPath:filePath];
+    NSError *error;
+    NSURL *fileURL = [NSURL fileURLWithPath:filePath];
+    BOOL success = [fileURL setResourceValue:tags forKey:NSURLTagNamesKey error:&error];
+    if (!success) {
+        NSDictionary *notice = @{
+            QSNotifierType: @"QSTagFileFailed",
+            QSNotifierIcon: kQSFileTagIcon,
+            QSNotifierTitle: @"Failed to Set Tags",
+            QSNotifierText: [error localizedDescription]
+        };
+        QSShowNotifierWithAttributes(notice);
     }
 }
 
@@ -210,61 +203,4 @@ NSString *const kFileTaggingXAttrKeyword = @"com.apple.metadata:_kMDItemUserTags
     setxattr([path fileSystemRepresentation], [key UTF8String], [data bytes], [data length], 0, 0);
 }
 
-- (void)_removeAllValuesForKey:(NSString *)key atPath:(NSString *)path
-{
-    removexattr([path fileSystemRepresentation], [key UTF8String], 0);
-}
-
-- (void) setLabel:(NSInteger)label forPath:(NSString *)path{
-    FSCatalogInfo info;
-	FSRef par;
-    Boolean dir = false;
-    
-	if (FSPathMakeRef((const UInt8 *)[path fileSystemRepresentation],&par,&dir) == noErr) {
-        
-        /* Get the Finder Catalog Info */
-        OSErr err = FSGetCatalogInfo(&par,
-                                     kFSCatInfoContentMod | kFSCatInfoFinderXInfo | kFSCatInfoFinderInfo,
-                                     &info,
-                                     NULL,
-                                     NULL,
-                                     NULL);
-        
-        if (err != noErr)
-		{
-            NSLog(@"Unabled to get catalog info... %i", err);
-			return;
-		}
-        
-        /* Manipulate the Finder CatalogInfo */
-        UInt16 *flags = &((FileInfo*)(&info.finderInfo))->finderFlags;
-        
-        //To Turn off
-        // *flags &= kColor;
-        
-        /*
-         0 is off
-         1 is Grey
-         2 is Green
-         3 is Purple
-         4 is Blue
-         5 is Yellow
-         6 is Red
-         7 is Orange
-         */
-        
-        *flags = ( *flags &~ kColor) | ( (label << 1) & kColor );
-        
-        /* Set the Finder Catalog Info Back */
-        err = FSSetCatalogInfo(&par,
-                               kFSCatInfoContentMod | kFSCatInfoFinderXInfo | kFSCatInfoFinderInfo,
-                               &info);
-        
-        if (err != noErr)
-        {
-            NSLog(@"Unable to set catalog info... %i", err);
-            return;
-        }
-    }
-}
 @end

@@ -22,7 +22,7 @@
         tag = [self makeObjectWithIdentifier:tagID];
         [tag setName:name];
         [tag setLabel:tagName];
-        [tag setObject:rawTagName forType:kQSFileTag];
+        [tag setObject:tagName forType:kQSFileTag];
         [tag setPrimaryType:kQSFileTag];
         if ([nameParts count] == 2) {
             // store the color for icon customization

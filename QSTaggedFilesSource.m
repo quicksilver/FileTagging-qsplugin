@@ -55,7 +55,7 @@
 {
     NSMutableArray *knownTags = [NSMutableArray array];
     for (NSString *tagData in [[FileTaggingHandler sharedHandler] allTagNames]) {
-        [knownTags addObject:[FileTaggingHandler nameFromTagData:tagData]];
+        [knownTags addObject:[tagData lines][0]];
     }
     NSArray *completions = [knownTags filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF beginswith[cd] %@", substring]];
     return completions;
