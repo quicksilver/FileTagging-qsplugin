@@ -165,6 +165,7 @@ NSString *const kFileTaggingXAttrKeyword = @"com.apple.metadata:_kMDItemUserTags
         MDItemRef item = (MDItemRef)MDQueryGetResultAtIndex(query, i);
         NSString *path = (NSString*)MDItemCopyAttribute(item, kMDItemPath);
         NSArray *tagNames = [self tagNamesForFile:path];
+        [path release];
         for (NSString *tagName in tagNames) {
             [tags addObject:tagName];
         }
