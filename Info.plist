@@ -225,6 +225,8 @@
 		<dict>
 			<key>QSFileTagged</key>
 			<dict>
+				<key>allowMatching</key>
+				<true/>
 				<key>icon</key>
 				<string>TagIcon</string>
 				<key>name</key>
@@ -232,10 +234,12 @@
 				<key>provider</key>
 				<string>QSFileTaggingAction</string>
 				<key>type</key>
-				<string>Finder</string>
+				<string>File Tagging</string>
 			</dict>
 			<key>QSFileTagsCleared</key>
 			<dict>
+				<key>allowMatching</key>
+				<true/>
 				<key>icon</key>
 				<string>TagIcon</string>
 				<key>name</key>
@@ -243,7 +247,7 @@
 				<key>provider</key>
 				<string>QSFileTaggingAction</string>
 				<key>type</key>
-				<string>Finder</string>
+				<string>File Tagging</string>
 			</dict>
 		</dict>
 	</dict>
