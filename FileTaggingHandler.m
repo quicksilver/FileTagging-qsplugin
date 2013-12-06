@@ -27,7 +27,7 @@ NSString *const kFileTaggingXAttrKeyword = @"com.apple.metadata:_kMDItemUserTags
 - (NSSet *)allTagNames
 {
     NSString *queryString = [NSString stringWithFormat:@"%@ == *", kFileTaggingKeyword];
-    NSArray *types = [NSArray arrayWithObject:kFileTaggingKeyword];
+    NSArray *types = [NSArray arrayWithObject:(NSString *)kMDItemPath];
     
     NSMutableSet *tags = [NSMutableSet set];
     [self _runQuery:queryString forTypes:types usingBlock:[self _addTagNamesBlock:tags]];
@@ -89,8 +89,9 @@ NSString *const kFileTaggingXAttrKeyword = @"com.apple.metadata:_kMDItemUserTags
 
 - (NSArray *)tagNamesForFile:(NSString *)filePath
 {
-    NSArray *tagNames = [self _valueForKey:kFileTaggingXAttrKeyword atPath:filePath];
-    return tagNames;
+    NSURL *fileURL = [NSURL fileURLWithPath:filePath];
+    NSDictionary *res = [fileURL resourceValuesForKeys:@[NSURLTagNamesKey] error:nil];
+    return [res objectForKey:NSURLTagNamesKey];
 }
 
 - (void)addTags:(NSArray *)tags toFile:(NSString *)filePath
@@ -109,7 +110,18 @@ NSString *const kFileTaggingXAttrKeyword = @"com.apple.metadata:_kMDItemUserTags
 
 - (void)setTags:(NSArray *)tags forFile:(NSString *)filePath
 {
-    [self _setValue:tags forKey:kFileTaggingXAttrKeyword atPath:filePath];
+    NSError *error;
+    NSURL *fileURL = [NSURL fileURLWithPath:filePath];
+    BOOL success = [fileURL setResourceValue:tags forKey:NSURLTagNamesKey error:&error];
+    if (!success) {
+        NSDictionary *notice = @{
+            QSNotifierType: @"QSTagFileFailed",
+            QSNotifierIcon: kQSFileTagIcon,
+            QSNotifierTitle: @"Failed to Set Tags",
+            QSNotifierText: [error localizedDescription]
+        };
+        QSShowNotifierWithAttributes(notice);
+    }
 }
 
 - (NSArray *)tagsFromString:(NSString *)tagList
@@ -150,11 +162,12 @@ NSString *const kFileTaggingXAttrKeyword = @"com.apple.metadata:_kMDItemUserTags
 - (QSFileTagQueryBlock)_addTagNamesBlock:(NSMutableSet *)tags
 {
     return [[^(MDQueryRef query, CFIndex i) {
-        CFArrayRef tagNames = MDQueryGetAttributeValueOfResultAtIndex(query, (CFStringRef)kFileTaggingKeyword, i);
-        if(tagNames != NULL) {
-            for(NSString *tagName in (NSArray *)tagNames) {
-                [tags addObject:tagName];
-            }
+        MDItemRef item = (MDItemRef)MDQueryGetResultAtIndex(query, i);
+        NSString *path = (NSString*)MDItemCopyAttribute(item, kMDItemPath);
+        NSArray *tagNames = [self tagNamesForFile:path];
+        [path release];
+        for (NSString *tagName in tagNames) {
+            [tags addObject:tagName];
         }
     } copy] autorelease];
 }
@@ -179,15 +192,15 @@ NSString *const kFileTaggingXAttrKeyword = @"com.apple.metadata:_kMDItemUserTags
     if(dataSize < ULONG_MAX) {
         NSMutableData *data = [NSMutableData dataWithLength:dataSize];
         getxattr([path fileSystemRepresentation], [key UTF8String], [data mutableBytes], [data length], 0, 0);
-        NSPropertyListFormat outFormat = NSPropertyListXMLFormat_v1_0;
-        value = [NSPropertyListSerialization propertyListFromData:data mutabilityOption:NSPropertyListImmutable format:&outFormat errorDescription:nil];
+        NSPropertyListFormat outFormat = NSPropertyListBinaryFormat_v1_0;
+        value = [NSPropertyListSerialization propertyListWithData:data options:NSPropertyListImmutable format:&outFormat error:nil];
     }
     return value;
 }
 
 - (void)_setValue:(id)value forKey:(NSString *)key atPath:(NSString* )path
 {
-    NSData *data = [NSPropertyListSerialization dataFromPropertyList:value format:NSPropertyListXMLFormat_v1_0 errorDescription:nil];
+    NSData *data = [NSPropertyListSerialization dataWithPropertyList:value format:NSPropertyListBinaryFormat_v1_0 options:0 error:nil];
     setxattr([path fileSystemRepresentation], [key UTF8String], [data bytes], [data length], 0, 0);
 }
 

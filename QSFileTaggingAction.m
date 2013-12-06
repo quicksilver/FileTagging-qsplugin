@@ -90,7 +90,10 @@
 
 - (QSObject *)clearTagsFromFiles:(QSObject *)files
 {
-    [self setToFiles:files tagList:nil];
+    FileTaggingHandler *tagHandler = [FileTaggingHandler sharedHandler];
+    for (QSObject *file in [files splitObjects]) {
+        [tagHandler setTags:@[] forFile:[file objectForType:NSFilenamesPboardType]];
+    }
     [[NSNotificationCenter defaultCenter] postNotificationName:@"QSEventNotification" object:@"QSFileTagsCleared" userInfo:@{@"object": files}];
     [self updateTagsOnDisk];
     return nil;
@@ -129,7 +132,16 @@
         }
     }
     return nil;
-} 
+}
+
+- (NSArray *)validActionsForDirectObject:(QSObject *)dObject indirectObject:(QSObject *)iObject
+{
+    // don't allow transient tags to be applied to files
+    if (![[dObject identifier] containsString:kQSFileTagTransient]) {
+        return @[@"AddTagsToFiles"];
+    }
+    return nil;
+}
 
 - (void)addCatalogTags:(QSObject *)tags
 {

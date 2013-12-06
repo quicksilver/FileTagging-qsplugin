@@ -53,7 +53,10 @@
 
 - (NSArray *)tokenField:(NSTokenField *)tokenField completionsForSubstring:(NSString *)substring indexOfToken:(NSInteger)tokenIndex indexOfSelectedItem:(NSInteger *)selectedIndex
 {
-    NSArray *knownTags = [[[FileTaggingHandler sharedHandler] allTagNames] allObjects];
+    NSMutableArray *knownTags = [NSMutableArray array];
+    for (NSString *tagData in [[FileTaggingHandler sharedHandler] allTagNames]) {
+        [knownTags addObject:[tagData lines][0]];
+    }
     NSArray *completions = [knownTags filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF beginswith[cd] %@", substring]];
     return completions;
 }

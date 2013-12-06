@@ -11,6 +11,7 @@
 #define kQSFileTagTransient @"QSFileTagTransient"
 #define kQSFileTagList @"QSFileTagList"
 #define kQSFileTagIcon [QSResourceManager imageNamed:@"TagIcon"]
+#define kQSFileTagColorKey @"QSFileTagColor"
 
 typedef void(^ QSFileTagQueryBlock)(MDQueryRef query, CFIndex i);
 

@@ -28,6 +28,17 @@
     return tags;
 }
 
+- (NSString *)detailsOfObject:(QSObject *)object
+{
+    if ([[object identifier] containsString:kQSFileTagTransient]) {
+        // leave details alone for transient tags
+        return nil;
+    } else {
+        // effectively suppress details by making them equal to name
+        return [object displayName];
+    }
+}
+
 - (BOOL)loadChildrenForObject:(QSObject *)object
 {
     NSMutableArray *children = [NSMutableArray array];
@@ -35,7 +46,7 @@
     NSString *tagListString = [object objectForCache:kQSFileTagList];
     if (!tagListString) {
         // a normal tag from the catalog
-        tagListString = [object objectForType:kQSFileTag];
+        tagListString = [object label];
     }
     [children addObjectsFromArray:[[FileTaggingHandler sharedHandler] filesAndRelatedTagsForTagList:tagListString]];
     [object setChildren:children];
